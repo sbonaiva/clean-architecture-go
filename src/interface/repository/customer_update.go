@@ -50,7 +50,7 @@ func (r *updateCustomerRepository) Execute(customer *domain.Customer) error {
 	res, err := r.collection.ReplaceOne(context.Background(), bson.M{"_id": objectID}, entity)
 
 	if err != nil {
-		r.logger.Error("failed to update user", "error", err.Error())
+		r.logger.Error("failed to update customer", "error", err.Error())
 		return domain.NewCoreError(http.StatusInternalServerError, UpdateCustomerFailed)
 	}
 
