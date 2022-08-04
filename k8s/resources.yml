@@ -1,0 +1,44 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: ns-clean-architecture-go
+  labels:
+    name: ns-clean-architecture-go
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name:  ms-clean-architecture-go
+  namespace: ns-clean-architecture-go
+spec:
+  selector:
+    app:  ms-clean-architecture-go
+  type:  ClusterIP
+  ports:
+  - name:  http
+    port:  8080
+    targetPort: 8080
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ms-clean-architecture-go-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ms-clean-architecture-go
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ms-clean-architecture-go
+    spec:
+      containers:
+      - name: ms-clean-architecture-go
+        image: sbonaiva/clean-architecture-go:latest
+        ports:
+        - containerPort: 8080
+---
+#ingress
+#pod
+#hpa

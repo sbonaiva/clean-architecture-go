@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  customers:
+    build: .
+    image: sbonaiva/clean-architecture-go
+    container_name: clean-architecture-go
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_URL: 'mongodb://root:root@mongo:27017'
+      KAFKA_BROKERS: 'kafka:9092'
+      KAFKA_CLIENT_ID: 'clean-architecture-go'
+networks: 
+  default:
+    name: clean-architecture-go
